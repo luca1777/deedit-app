@@ -1,13 +1,13 @@
-'use client';
-import type { NextPage } from 'next';
-import UpArrow from './icons/UpArrow';
-import DownArrow from './icons/DownArrow';
-import ShareIcon from './icons/ShareIcon';
-import Bookmark from './icons/Bookmark';
-import Coments from './icons/Coments';
-import Link from 'next/link';
-import { useState } from 'react';
-import ShareModal from './ShareModal';
+"use client";
+import type { NextPage } from "next";
+import UpArrow from "./icons/UpArrow";
+import DownArrow from "./icons/DownArrow";
+import ShareIcon from "./icons/ShareIcon";
+import Bookmark from "./icons/Bookmark";
+import Coments from "./icons/Coments";
+import Link from "next/link";
+import { useState } from "react";
+import ShareModal from "./ShareModal";
 
 interface PostProps {
   post: {
@@ -25,7 +25,7 @@ interface PostProps {
   };
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: NextPage = ({ post }: PostProps) => {
   const { body, title } = post;
   const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -34,28 +34,28 @@ const Post: React.FC<PostProps> = ({ post }) => {
   };
 
   return (
-    <div className="max-w-[1159px] flex flex-col text-white font-inter mx-6 mb-6">
+    <div className="mx-6 mb-6 flex max-w-[1159px] flex-col text-white">
       <Link href="/post" className="no-underline">
-        <div className="w-full flex flex-col items-start justify-start gap-[10px_0px] shrink-0 mb-6">
-          <div className="flex flex-row justify-between flex-wrap items-center gap-[0px_9px] max-w-full w-full">
-            <h1 className="flex-1 relative text-2xl lg:text-4xl font-black font-inherit inline-block max-w-full">
+        <div className="mb-6 flex w-full shrink-0 flex-col items-start justify-start gap-[10px_0px]">
+          <div className="flex w-full max-w-full flex-row flex-wrap items-center justify-between gap-[0px_9px]">
+            <h1 className="relative inline-block max-w-full flex-1 text-2xl font-black lg:text-4xl">
               {title}
             </h1>
-            <div className="w-[80.3px] flex flex-col items-start justify-start pt-2.5 px-0 pb-0 box-border text-center text-11xl">
-              <div className="self-stretch flex flex-col items-start justify-start gap-[22.75px_0px]">
-                <div className="flex flex-row items-start justify-start py-0 pr-[22px] pl-[22.199999999999815px]">
+            <div className="box-border flex w-[80.3px] flex-col items-start justify-start px-0 pb-0 pt-2.5 text-center">
+              <div className="flex flex-col items-start justify-start gap-[22.75px_0px] self-stretch">
+                <div className="flex flex-row items-start justify-start py-0 pl-[22.199999999999815px] pr-[22px]">
                   <UpArrow />
                 </div>
-                <div className="self-stretch h-[45.5px] relative font-extrabold flex items-center justify-center shrink-0 mq950:text-5xl mq450:text-lg">
+                <div className="mq950:text-5xl mq450:text-lg relative flex h-[45.5px] shrink-0 items-center justify-center self-stretch font-extrabold">
                   70
                 </div>
-                <div className="flex flex-row items-start justify-start py-0 pr-[22px] pl-[22.199999999999815px]">
+                <div className="flex flex-row items-start justify-start py-0 pl-[22.199999999999815px] pr-[22px]">
                   <DownArrow />
                 </div>
               </div>
             </div>
           </div>
-          <div className="max-w-[1087px] relative text-lg font-medium inline-block shrink-0 mt-2">
+          <div className="relative mt-2 inline-block max-w-[1087px] shrink-0 text-lg font-medium">
             {body}
           </div>
         </div>
@@ -64,18 +64,18 @@ const Post: React.FC<PostProps> = ({ post }) => {
         <div className="flex items-center justify-center gap-6">
           <button
             onClick={() => setIsShareOpen(true)}
-            className="hover:scale-110 transition-all duration-300"
+            className="transition-all duration-300 hover:scale-110"
           >
             <ShareIcon color="white" />
           </button>
-          <button className="hover:scale-110 transition-all duration-300">
+          <button className="transition-all duration-300 hover:scale-110">
             <Bookmark />
           </button>
           <button className="pulse">
             <Coments />
           </button>
-          <button className="cursor-pointer [border:none] py-[9px] px-4 bg-white rounded-29xl flex flex-row items-center justify-center gap-[0px_4px] whitespace-nowrap hover:bg-red-300">
-            <b className="relative text-xl tracking-[-0.01em] leading-[140%] font-inter text-firebrick text-left">
+          <button className="flex cursor-pointer flex-row items-center justify-center gap-[0px_4px] whitespace-nowrap rounded-29xl bg-white px-4 py-[9px] [border:none] hover:bg-red-300">
+            <b className="relative text-left text-xl leading-[140%] tracking-[-0.01em] text-firebrick">
               zi si tu ceva
             </b>
           </button>

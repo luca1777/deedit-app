@@ -2,13 +2,13 @@ import type { NextPage } from "next";
 import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
 
-const MisiunePage: NextPage = () => {
+const CupluPage: NextPage = () => {
   return (
     <>
       <div className="w-full bg-black flex flex-col justify-center items-center">
         <Category />
         <div className="flex flex-col w-full">
-          <BannerHome textPrimary="misiune&" textSecondary="valori" />
+          <BannerHome textPrimary="povesti de" textSecondary="cuplu" />
         </div>
         <div className="max-w-[1126px] flex mx-8">
           <p className="w-full text-11xl mt-2 text-white">
@@ -28,4 +28,4 @@ const MisiunePage: NextPage = () => {
   );
 };
 
-export default MisiunePage;
+export default CupluPage;
