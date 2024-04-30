@@ -4,7 +4,7 @@ import Post from "../../../components/Post";
 import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
 
-const TristePage: NextPage = () => {
+const SadPage: NextPage = () => {
   return (
     <>
       <div className="w-full bg-black flex flex-col justify-center items-center">
@@ -19,4 +19,4 @@ const TristePage: NextPage = () => {
   );
 };
 
-export default TristePage;
+export default SadPage;

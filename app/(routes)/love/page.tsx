@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
 
-const CupluPage: NextPage = () => {
+const LovePage: NextPage = () => {
   return (
     <>
       <div className="w-full bg-black flex flex-col justify-center items-center">
@@ -28,4 +28,4 @@ const CupluPage: NextPage = () => {
   );
 };
 
-export default CupluPage;
+export default LovePage;

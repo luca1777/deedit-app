@@ -39,33 +39,33 @@ const Category: NextPage = () => {
             </b>
           </button>
         </Link>
-        <Link href="/triste">
+        <Link href="/sad">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/triste" ? "bg-firebrick" : "bg-transparent"
+              pathname === "/sad" ? "bg-firebrick" : "bg-transparent"
             } rounded-29xl hover:bg-tomato`}
           >
             <b
               className={`relative text-xl font-inter ${
-                pathname === "/triste" ? "text-white" : "text-black"
+                pathname === "/sad" ? "text-white" : "text-black"
               }`}
             >
-              Triste
+              Sad
             </b>
           </button>
         </Link>
-        <Link href="/cuplu">
+        <Link href="/love">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/cuplu" ? "bg-firebrick" : "bg-transparent"
+              pathname === "/love" ? "bg-firebrick" : "bg-transparent"
             } rounded-29xl hover:bg-tomato`}
           >
             <b
               className={`relative text-xl font-inter ${
-                pathname === "/cuplu" ? "text-white" : "text-black"
+                pathname === "/love" ? "text-white" : "text-black"
               }`}
             >
-              Cuplu
+              Love
             </b>
           </button>
         </Link>

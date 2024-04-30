@@ -3,12 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-// import { createPost } from '../actions/createPost';
 import Image from "next/image";
 import UserFakeImg from "../public/assets/user-fake.jpg";
 import CloseIcon from "../public/assets/close-create-post.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { createPost } from "@/lib/actions/post.action";
 
 const schema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -21,6 +21,7 @@ const schema = Yup.object().shape({
 
 const PostForm = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [titleDraft, setTitleDraft] = useLocalStorage("titleDraft", "");
   const [textDraft, setTextDraft] = useLocalStorage("textDraft", "");
@@ -44,16 +45,20 @@ const PostForm = () => {
   };
 
   const onSubmit = async (values) => {
-    // await createPost({
-    //   title: values.title,
-    //   text: values.content,
-    //   category: values.category,
-    // });
-    console.log(values);
+    try {
+      await createPost({
+        title: values.title,
+        content: values.content,
+        category: values.category,
+      });
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+
     localStorage.removeItem("titleDraft");
     localStorage.removeItem("textDraft");
     reset();
-    router.back();
   };
 
   return (
@@ -114,15 +119,15 @@ const PostForm = () => {
                     className="mt-1 rounded-lg border text-gray-400 border-gray-500 p-2 w-[300px]"
                     {...register("category")}
                   >
-                    <option value="">Te rog alege un subiect...</option>
-                    <option className="text-black" value="sex">
-                      Sex
+                    <option value="">Please choose a category...</option>
+                    <option className="text-black" value="funny">
+                      Funny
                     </option>
-                    <option className="text-black" value="alcool">
-                      Alcool
+                    <option className="text-black" value="sad">
+                      Sad
                     </option>
-                    <option className="text-black" value="droguri">
-                      Droguri
+                    <option className="text-black" value="love">
+                      Love
                     </option>
                   </select>
                   <p className="text-red-600">{errors.category?.message}</p>
