@@ -1,10 +1,12 @@
-"use client";
 import type { NextPage } from "next";
-import Post from "../../../components/Post";
 import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
+import { fetchPostsByCategory } from "@/lib/actions/post.action";
+import PostCard from "@/components/PostCard";
 
-const SadPage: NextPage = () => {
+const SadPage: NextPage = async () => {
+  const postsData = await fetchPostsByCategory("sad", 1, 30);
+
   return (
     <>
       <div className="w-full bg-black flex flex-col justify-center items-center">
@@ -12,8 +14,13 @@ const SadPage: NextPage = () => {
         <div className="flex flex-col w-full">
           <BannerHome textPrimary="povesti" textSecondary="cam triste" />
         </div>
-        {/* <Post />
-        <Post /> */}
+        <div className="flex w-full flex-col items-center justify-center gap-6 px-4">
+          {postsData.posts.map((post: any) => (
+            <div key={post._id} className="w-full">
+              <PostCard post={post} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

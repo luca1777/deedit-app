@@ -9,7 +9,7 @@ const HomePage: NextPage = async () => {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-center bg-black pb-8">
+      <div className="flex w-full flex-col items-center justify-center bg-black">
         <Category />
         <div className="flex w-full flex-col">
           <BannerHome textPrimary="exploreaza" textSecondary="povestile" />

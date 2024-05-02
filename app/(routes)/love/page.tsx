@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
 import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
+import { fetchPostsByCategory } from "@/lib/actions/post.action";
+import PostCard from "@/components/PostCard";
 
-const LovePage: NextPage = () => {
+const LovePage: NextPage = async () => {
+  const postsData = await fetchPostsByCategory("love", 1, 30);
+
   return (
     <>
       <div className="w-full bg-black flex flex-col justify-center items-center">
@@ -10,18 +14,12 @@ const LovePage: NextPage = () => {
         <div className="flex flex-col w-full">
           <BannerHome textPrimary="povesti de" textSecondary="cuplu" />
         </div>
-        <div className="max-w-[1126px] flex mx-8">
-          <p className="w-full text-11xl mt-2 text-white">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum...
-          </p>
+        <div className="flex w-full flex-col items-center justify-center gap-6 px-4">
+          {postsData.posts.map((post: any) => (
+            <div key={post._id} className="w-full">
+              <PostCard post={post} />
+            </div>
+          ))}
         </div>
       </div>
     </>

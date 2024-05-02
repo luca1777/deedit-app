@@ -46,6 +46,38 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   return { posts: postsData, isNext };
 }
 
+export async function fetchPostsByCategory(
+  category,
+  pageNumber = 1,
+  pageSize = 20
+) {
+  connectToDatabase();
+
+  const skipAmount = pageSize * (pageNumber - 1);
+
+  const posts = Post.find({
+    category: category,
+    parentId: { $in: [null, undefined] },
+  })
+    .sort({ createdAt: -1 })
+    .skip(skipAmount)
+    .limit(pageSize)
+    .populate({
+      path: "children",
+      model: "Comment",
+    });
+
+  const totalPosts = await Post.countDocuments({
+    parentId: { $in: [null, undefined] },
+  });
+
+  const postsData = await posts.exec();
+
+  const isNext = totalPosts > skipAmount + postsData.length;
+
+  return { posts: postsData, isNext };
+}
+
 export async function fetchPostById(id: string) {
   connectToDatabase();
 
