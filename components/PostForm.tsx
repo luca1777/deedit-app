@@ -11,19 +11,16 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { createPost } from "@/lib/actions/post.action";
 
 const schema = Yup.object().shape({
-  title: Yup.string().required("Title is required"),
   content: Yup.string()
     .required("Content is required")
     .min(6, "Content must be at least 6 characters"),
   category: Yup.string().required("Category is required"),
-  accountId: Yup.string(),
 });
 
 const PostForm = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [titleDraft, setTitleDraft] = useLocalStorage("titleDraft", "");
   const [textDraft, setTextDraft] = useLocalStorage("textDraft", "");
 
   const {
@@ -34,7 +31,6 @@ const PostForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: titleDraft,
       content: textDraft,
       category: "",
     },
@@ -47,7 +43,6 @@ const PostForm = () => {
   const onSubmit = async (values) => {
     try {
       await createPost({
-        title: values.title,
         content: values.content,
         category: values.category,
       });
@@ -55,8 +50,6 @@ const PostForm = () => {
     } catch (error) {
       console.log(error);
     }
-
-    localStorage.removeItem("titleDraft");
     localStorage.removeItem("textDraft");
     reset();
   };
@@ -86,19 +79,6 @@ const PostForm = () => {
                 />
               </div>
               <div className="w-full">
-                <div className="mt-2">
-                  <input
-                    id="title"
-                    placeholder="Scrie un titlu convingator"
-                    onInput={(e) =>
-                      setTitleDraft((e.target as HTMLInputElement).value)
-                    }
-                    {...register("title")}
-                    className="w-full border-b font-semibold text-xl outline-none"
-                  />
-                  <p className="text-red-600">{errors.content?.message}</p>
-                </div>
-
                 <div className="w-full my-4">
                   <textarea
                     id="content"
