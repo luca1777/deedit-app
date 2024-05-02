@@ -3,6 +3,8 @@
 import Post from "@/database/post.model";
 import { connectToDatabase } from "../mongoose";
 import { revalidatePath } from "next/cache";
+import Comment from "@/database/comment.model";
+import { exec } from "child_process";
 
 export async function createPost(params: any) {
   try {
@@ -30,15 +32,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     .limit(pageSize)
     .populate({
       path: "children",
-      model: "Post",
-      populate: {
-        path: "children",
-        model: "Post",
-        populate: {
-          path: "children",
-          model: "Post",
-        },
-      },
+      model: "Comment",
     });
 
   const totalPosts = await Post.countDocuments({
@@ -59,15 +53,7 @@ export async function fetchPostById(id: string) {
     const post = await Post.findById(id)
       .populate({
         path: "children",
-        model: "Post",
-        populate: {
-          path: "children",
-          model: "Post",
-          populate: {
-            path: "children",
-            model: "Post",
-          },
-        },
+        model: "Comment",
       })
       .exec();
 
@@ -86,22 +72,22 @@ export async function addCommentToPost(
 
   try {
     // adding a comment
-    const originalPost = await Post.findById(postId);
+    const parentPost = await Post.findById(postId);
 
-    if (!originalPost) {
+    if (!parentPost) {
       throw new Error("Post not found");
     }
 
-    const commentPost = new Post({
+    const commentPost = new Comment({
       content: comment,
       parentId: postId,
     });
 
     const savedComment = await commentPost.save();
 
-    originalPost.children.push(savedComment._id);
+    parentPost.children.push(savedComment._id);
 
-    await originalPost.save();
+    await parentPost.save();
 
     revalidatePath(path);
   } catch (error) {

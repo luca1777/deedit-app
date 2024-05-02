@@ -5,12 +5,14 @@ import UserImg from "../../public/assets/user-fake.jpg";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { addCommentToPost } from "@/lib/actions/post.action";
+import { addReplyToComment } from "@/lib/actions/comment.action";
 
 interface Props {
   postId: string;
+  isReply: boolean;
 }
 
-const Comment = ({ postId }: Props) => {
+const Comment = ({ postId, isReply }: Props) => {
   const [commentBody, setCommentBody] = useState<string>("");
   const pathname = usePathname();
 
@@ -23,7 +25,12 @@ const Comment = ({ postId }: Props) => {
   const onSubmit = async (values) => {
     console.log(postId);
     const plainPostId = JSON.parse(JSON.stringify(postId));
-    await addCommentToPost(plainPostId, values.comment, pathname);
+
+    if (isReply) {
+      await addReplyToComment(plainPostId, values.comment, pathname);
+    } else {
+      await addCommentToPost(plainPostId, values.comment, pathname);
+    }
     reset();
   };
 
@@ -31,7 +38,7 @@ const Comment = ({ postId }: Props) => {
     <div className="w-full mx-auto max-w-[1000px]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full flex justify-between gap-8 border-t border-b border-dark-4 py-4 items-center">
-          <div className="w-full flex gap-4 ml-8">
+          <div className="w-full flex gap-4">
             <div>
               <Image
                 src={UserImg}
@@ -45,7 +52,7 @@ const Comment = ({ postId }: Props) => {
               <div className="mt-2">
                 <input
                   id="comment"
-                  placeholder="Repply to this post..."
+                  placeholder="Repply..."
                   onInput={(e) =>
                     setCommentBody((e.target as HTMLInputElement).value)
                   }

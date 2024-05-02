@@ -6,10 +6,8 @@ import HeartImgGray from "../public/assets/heart-gray.svg";
 import ReplyImg from "../public/assets/reply.svg";
 import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
-// import { getCommentsTopLevel } from '../actions/getCommentsTopLevel';
 import ShareModal from "./ShareModal";
 import { text } from "stream/consumers";
-// import { addLike } from '../actions/addLike';
 
 interface PostProps {
   post: Post;
@@ -25,24 +23,6 @@ interface Post {
 
 const PostCard = ({ post }: PostProps) => {
   const { content, _id, parentId, createdAt, children } = post;
-  // const [topLevelComments, setTopLevelComments] = useState([]);
-  // const [isShareOpen, setIsShareOpen] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchLengthComments = async () => {
-  //     const response = await getCommentsTopLevel(_id);
-  //     setTopLevelComments(response);
-  //   };
-  //   fetchLengthComments();
-  // }, []);
-
-  // const closeModal = () => {
-  //   setIsShareOpen(false);
-  // };
-
-  const handleLike = async () => {
-    // await addLike(_id);
-  };
 
   return (
     <article className="w-full mx-auto max-w-[1000px] flex flex-col rounded-xl bg-dark-4 p-7">
@@ -62,7 +42,7 @@ const PostCard = ({ post }: PostProps) => {
 
           <div className="flex w-full flex-col">
             <Link href="/" className="w-fit">
-              <h4 className="cursor-pointer text-base-semibold text-light-1">
+              <h4 className="cursor-pointer text-base-semibold text-light-1 pb-2">
                 Mihai Alexandru
               </h4>
             </Link>

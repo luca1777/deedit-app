@@ -13,7 +13,7 @@ const PostSchema = new Schema({
   category: { type: String },
   createdAt: { type: Date, default: Date.now },
   parentId: { type: String },
-  children: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  children: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Post = models.Post || model("Post", PostSchema);
