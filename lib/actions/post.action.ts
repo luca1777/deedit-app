@@ -78,6 +78,25 @@ export async function fetchPostsByCategory(
   return { posts: postsData, isNext };
 }
 
+export async function likePost(postId: string) {
+  connectToDatabase();
+
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $inc: { likes: 1 } },
+      { new: true }
+    ).exec();
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not like post");
+  }
+}
+
 export async function fetchPostById(id: string) {
   connectToDatabase();
 

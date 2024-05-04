@@ -8,6 +8,7 @@ import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
 import ShareModal from "./ShareModal";
 import { text } from "stream/consumers";
+import PostButtons from "./PostButtons";
 
 interface PostProps {
   post: Post;
@@ -49,42 +50,7 @@ const PostCard = ({ post }: PostProps) => {
             <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-5 flex flex-col gap-3">
-              <div className="flex gap-3.5">
-                {/* <button onClick={handleLike}> */}
-                <Image
-                  src={HeartImgGray}
-                  alt="heart"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain hover:scale-110"
-                />
-                {/* </button> */}
-                <Link href={`/post/${_id}`}>
-                  <Image
-                    src={ReplyImg}
-                    alt="reply"
-                    width={24}
-                    height={24}
-                    className="cursor-pointer object-contain animate-pulse"
-                  />
-                </Link>
-                <Image
-                  src={RepostImg}
-                  alt="repost"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain hover:scale-110"
-                />
-                {/* <button onClick={() => setIsShareOpen(true)}> */}
-                <Image
-                  src={ShareImg}
-                  alt="share"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain hover:scale-110"
-                />
-                {/* </button> */}
-              </div>
+              <PostButtons postId={_id} />
 
               {children && children.length > 0 && (
                 <Link href={`/post/${_id}`}>
