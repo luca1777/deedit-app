@@ -4,14 +4,14 @@ import React from "react";
 import ReplyImg from "../public/assets/reply.svg";
 import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
-import LikeButton from "./LikeButton";
+import LikeButton from "./LikePostButton";
 
-const PostButtons = ({ postId }) => {
+const PostButtons = ({ postId, likes }) => {
   const plainCommentId = JSON.parse(JSON.stringify(postId));
 
   return (
     <div className="flex gap-3.5">
-      <LikeButton postId={plainCommentId} />
+      <LikeButton postId={plainCommentId} likes={likes} />
       <Link href={`/post/${postId}`}>
         <Image
           src={ReplyImg}

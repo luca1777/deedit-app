@@ -78,7 +78,7 @@ export async function fetchPostsByCategory(
   return { posts: postsData, isNext };
 }
 
-export async function likePost(postId: string) {
+export async function likePost(postId: string, path: string) {
   connectToDatabase();
 
   try {
@@ -91,9 +91,32 @@ export async function likePost(postId: string) {
     if (!post) {
       throw new Error("Post not found");
     }
+
+    revalidatePath(path);
   } catch (error) {
     console.error(error);
     throw new Error("Could not like post");
+  }
+}
+
+export async function dislikePost(postId: string, path: string) {
+  connectToDatabase();
+
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $inc: { likes: -1 } },
+      { new: true }
+    ).exec();
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    revalidatePath(path);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not dislike post");
   }
 }
 

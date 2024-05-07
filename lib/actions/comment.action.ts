@@ -57,3 +57,45 @@ export async function addReplyToComment(
     throw new Error("Could not add comment to post");
   }
 }
+
+export async function likeComment(commentId: string) {
+  connectToDatabase();
+
+  try {
+    const comment = await Comment.findByIdAndUpdate(
+      commentId,
+      { $inc: { likes: 1 } },
+      { new: true }
+    ).exec();
+
+    if (!comment) {
+      throw new Error("Comment not found");
+    }
+
+    revalidatePath(`/comment/${commentId}`);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not like comment");
+  }
+}
+
+export async function dislikeComment(commentId: string) {
+  connectToDatabase();
+
+  try {
+    const comment = await Comment.findByIdAndUpdate(
+      commentId,
+      { $inc: { likes: -1 } },
+      { new: true }
+    ).exec();
+
+    if (!comment) {
+      throw new Error("Comment not found");
+    }
+
+    revalidatePath(`/comment/${commentId}`);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not like comment");
+  }
+}

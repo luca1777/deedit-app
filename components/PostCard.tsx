@@ -2,12 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import UserImg from "../public/assets/user-fake.jpg";
-import HeartImgGray from "../public/assets/heart-gray.svg";
-import ReplyImg from "../public/assets/reply.svg";
-import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
 import ShareModal from "./ShareModal";
-import { text } from "stream/consumers";
 import PostButtons from "./PostButtons";
 
 interface PostProps {
@@ -19,11 +15,12 @@ interface Post {
   content: string;
   parentId: string | null;
   createdAt: string;
+  likes: number;
   children: Comment[];
 }
 
 const PostCard = ({ post }: PostProps) => {
-  const { content, _id, parentId, createdAt, children } = post;
+  const { content, _id, parentId, createdAt, children, likes } = post;
 
   return (
     <article className="w-full mx-auto max-w-[1000px] flex flex-col rounded-xl bg-dark-4 p-7">
@@ -50,11 +47,11 @@ const PostCard = ({ post }: PostProps) => {
             <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-5 flex flex-col gap-3">
-              <PostButtons postId={_id} />
+              <PostButtons postId={_id} likes={likes} />
 
               {children && children.length > 0 && (
                 <Link href={`/post/${_id}`}>
-                  <p className="text-subtle-medium text-gray-1">
+                  <p className="text-subtle-medium text-gray-400">
                     {children.length} replies
                   </p>
                 </Link>
