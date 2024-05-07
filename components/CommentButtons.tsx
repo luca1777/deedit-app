@@ -3,9 +3,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ReplyImg from "../public/assets/reply.svg";
 import RepostImg from "../public/assets/repost.svg";
-import ShareImg from "../public/assets/share.svg";
 import Comment from "./post-components/Comment";
 import LikeCommentButton from "./LikeCommentButton";
+import ShareButton from "./ShareButton";
 
 const CommentButtons = ({ commentId, likes }) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
@@ -34,13 +34,7 @@ const CommentButtons = ({ commentId, likes }) => {
           height={24}
           className="cursor-pointer object-contain hover:scale-110"
         />
-        <Image
-          src={ShareImg}
-          alt="share"
-          width={24}
-          height={24}
-          className="cursor-pointer object-contain hover:scale-110"
-        />
+        <ShareButton />
       </div>
 
       {isReplyOpen && (
