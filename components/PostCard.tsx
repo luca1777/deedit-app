@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import UserImg from "../public/assets/user-fake.jpg";
-import ShareImg from "../public/assets/share.svg";
-import ShareModal from "./ShareModal";
+
 import PostButtons from "./PostButtons";
 
 interface PostProps {
@@ -59,7 +58,6 @@ const PostCard = ({ post }: PostProps) => {
             </div>
           </div>
         </div>
-        {/* {isShareOpen && <ShareModal closeModal={closeModal} />} */}
       </div>
     </article>
   );

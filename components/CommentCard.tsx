@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import UserImg from "../public/assets/user-fake.jpg";
 import ShareImg from "../public/assets/share.svg";
-import ShareModal from "./ShareModal";
+import ShareModal from "./ShareButton";
 import { text } from "stream/consumers";
 import { fetchCommentById } from "@/lib/actions/comment.action";
 import CommentButtons from "./CommentButtons";

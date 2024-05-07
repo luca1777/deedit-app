@@ -3,8 +3,8 @@ import Link from "next/link";
 import React from "react";
 import ReplyImg from "../public/assets/reply.svg";
 import RepostImg from "../public/assets/repost.svg";
-import ShareImg from "../public/assets/share.svg";
 import LikeButton from "./LikePostButton";
+import ShareButton from "./ShareButton";
 
 const PostButtons = ({ postId, likes }) => {
   const plainCommentId = JSON.parse(JSON.stringify(postId));
@@ -28,15 +28,7 @@ const PostButtons = ({ postId, likes }) => {
         height={24}
         className="cursor-pointer object-contain hover:scale-110"
       />
-      {/* <button onClick={() => setIsShareOpen(true)}> */}
-      <Image
-        src={ShareImg}
-        alt="share"
-        width={24}
-        height={24}
-        className="cursor-pointer object-contain hover:scale-110"
-      />
-      {/* </button> */}
+      <ShareButton />
     </div>
   );
 };
