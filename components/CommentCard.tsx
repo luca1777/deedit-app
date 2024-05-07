@@ -2,9 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import UserImg from "../public/assets/user-fake.jpg";
-import HeartImgGray from "../public/assets/heart-gray.svg";
-import ReplyImg from "../public/assets/reply.svg";
-import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
 import ShareModal from "./ShareModal";
 import { text } from "stream/consumers";
@@ -19,12 +16,13 @@ interface Comment {
   _id: string;
   content: string;
   parentId: string;
+  likes: number;
   createdAt: string;
   children: Comment[];
 }
 
 const CommentCard = async ({ comment }: CommentProps) => {
-  const { content, _id, parentId, createdAt, children } = comment;
+  const { content, _id, parentId, createdAt, children, likes } = comment;
   const plainCommentId = JSON.parse(JSON.stringify(_id));
 
   const nestedReply = await fetchCommentById(_id);
@@ -54,7 +52,7 @@ const CommentCard = async ({ comment }: CommentProps) => {
             <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-2 flex flex-col gap-3">
-              <CommentButtons commentId={plainCommentId} />
+              <CommentButtons commentId={plainCommentId} likes={likes} />
 
               {children && children.length > 0 && (
                 <div className="">

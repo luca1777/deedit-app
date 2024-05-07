@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import HeartImgGray from "../public/assets/heart-gray.svg";
 import ReplyImg from "../public/assets/reply.svg";
 import RepostImg from "../public/assets/repost.svg";
 import ShareImg from "../public/assets/share.svg";
 import Comment from "./post-components/Comment";
+import LikeCommentButton from "./LikeCommentButton";
 
-const CommentButtons = ({ commentId }) => {
+const CommentButtons = ({ commentId, likes }) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   const handleReply = () => {
@@ -17,13 +17,7 @@ const CommentButtons = ({ commentId }) => {
   return (
     <div className="flex flex-col gap-3.5">
       <div className="flex gap-3.5">
-        <Image
-          src={HeartImgGray}
-          alt="heart"
-          width={24}
-          height={24}
-          className="cursor-pointer object-contain hover:scale-110"
-        />
+        <LikeCommentButton commentId={commentId} likes={likes} />
         <button onClick={handleReply}>
           <Image
             src={ReplyImg}
