@@ -18,7 +18,17 @@ body {
   padding-bottom: 100px;
 }
 
-.max-font-120px {
+.padding-top-layout {
+  padding-top: 80px;
+}
+
+@media (min-width: 768px) {
+  .padding-md-top-layout {
+    padding-top: 112px;
+  }
+}
+
+.padding .max-font-120px {
   font-size: clamp(3rem, 12vw, 120px);
 }
 
