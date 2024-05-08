@@ -3,14 +3,13 @@ import React from "react";
 import { sidebarLinks } from "../../constants/index";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Bottombar = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
   return (
-    <section className="sticky bottom-0 z-10 w-full rounded-t-3xl bg-zinc-800 bg-opacity-70 p-4 backdrop-blur-lg xs:px-7 md:hidden">
+    <section className="fixed bottom-0 z-10 w-full rounded-t-3xl bg-zinc-800 bg-opacity-70 p-4 backdrop-blur-lg xs:px-7 md:hidden">
       <div className="flex items-center justify-between gap-3 xs:gap-5">
         {sidebarLinks.map((link) => {
           const isActive =

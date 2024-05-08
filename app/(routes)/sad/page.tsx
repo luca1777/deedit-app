@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import BannerHome from "../../../components/home-page/BannerHome";
 import Category from "../../../components/Category";
 import { fetchPostsByCategory } from "@/lib/actions/post.action";
 import PostCard from "@/components/PostCard";
@@ -9,11 +8,8 @@ const SadPage: NextPage = async () => {
 
   return (
     <>
-      <div className="w-full bg-black flex flex-col justify-center items-center">
+      <div className="w-full flex flex-col justify-center items-center">
         <Category />
-        <div className="flex flex-col w-full">
-          <BannerHome textPrimary="povesti" textSecondary="cam triste" />
-        </div>
         <div className="flex w-full flex-col items-center justify-center gap-6 px-4">
           {postsData.posts.map((post: any) => (
             <div key={post._id} className="w-full">

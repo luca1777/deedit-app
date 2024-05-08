@@ -14,6 +14,10 @@ body {
   background-color: black;
 }
 
+.padding-layout {
+  padding-bottom: 100px;
+}
+
 .max-font-120px {
   font-size: clamp(3rem, 12vw, 120px);
 }
@@ -75,9 +79,9 @@ body {
 
 .pulse {
   animation: pulse 2s infinite;
-  display: inline-flex; /* Center the child SVG icon */
-  align-items: center; /* Center the icon vertically */
-  justify-content: center; /* Center the icon horizontally */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fadeIn {

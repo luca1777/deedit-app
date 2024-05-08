@@ -201,6 +201,10 @@ module.exports = {
         'gray-1': '#697C89',
         glassmorphism: 'rgba(16, 16, 18, 0.60)',
       },
+      backgroundImage: {
+        'custom-gradient':
+          'linear-gradient(135deg, #BF00A9 0%, #BF2E2E 50%, #FF711D 100%)',
+      },
       borderRadius: {
         '29xl': '48px',
         '61xl': '80px',
