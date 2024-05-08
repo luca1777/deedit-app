@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Image from "next/image";
 import UserFakeImg from "../public/assets/user-fake.jpg";
 import CloseIcon from "../public/assets/close-create-post.svg";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { createPost } from "@/lib/actions/post.action";
 
@@ -19,8 +19,6 @@ const schema = Yup.object().shape({
 
 const PostForm = () => {
   const router = useRouter();
-  const pathname = usePathname();
-
   const [textDraft, setTextDraft] = useLocalStorage("textDraft", "");
 
   const {
@@ -82,7 +80,7 @@ const PostForm = () => {
                 <div className="w-full my-4">
                   <textarea
                     id="content"
-                    placeholder="Scrie o poveste marfa..."
+                    placeholder="What's on your mind?"
                     onInput={(e) =>
                       setTextDraft((e.target as HTMLInputElement).value)
                     }

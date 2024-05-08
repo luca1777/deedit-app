@@ -7,66 +7,42 @@ const Category: NextPage = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-full flex justify-center items-center bg-black">
-      <nav className="w-[450px] rounded-61xl bg-gray-400 shadow-[0px_12px_20px_rgba(0,_0,_0,_0.04)] flex justify-between py-[5px] px-1 max-w-[95%] lg:max-w-full text-xl text-black font-inter">
+    <div className="w-full flex justify-center items-center bg-black mb-10">
+      <nav className="w-[450px] rounded-xl bg-dark-4 shadow-[0px_12px_20px_rgba(0,_0,_0,_0.04)] flex justify-between py-[5px] px-1 max-w-[95%] lg:max-w-full text-xl text-black font-inter">
         <Link href="/">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/" ? "bg-firebrick" : "bg-transparent"
-            } rounded-29xl hover:bg-tomato`}
+              pathname === "/" ? "bg-custom-gradient" : "bg-transparent"
+            } rounded-xl hover:bg-custom-gradient`}
           >
-            <b
-              className={`relative text-xl font-inter ${
-                pathname === "/" ? "text-white" : "text-black"
-              }`}
-            >
-              All
-            </b>
+            <b className="relative text-xl font-semibold text-white">All</b>
           </button>
         </Link>
         <Link href="/funny">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/funny" ? "bg-firebrick" : "bg-transparent"
-            } rounded-29xl hover:bg-tomato`}
+              pathname === "/funny" ? "bg-custom-gradient" : "bg-transparent"
+            } rounded-xl hover:bg-custom-gradient`}
           >
-            <b
-              className={`relative text-xl font-inter ${
-                pathname === "/funny" ? "text-white" : "text-black"
-              }`}
-            >
-              Funny
-            </b>
+            <b className="relative text-xl font-semibold text-white">Funny</b>
           </button>
         </Link>
         <Link href="/sad">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/sad" ? "bg-firebrick" : "bg-transparent"
-            } rounded-29xl hover:bg-tomato`}
+              pathname === "/sad" ? "bg-custom-gradient" : "bg-transparent"
+            } rounded-xl hover:bg-custom-gradient`}
           >
-            <b
-              className={`relative text-xl font-inter ${
-                pathname === "/sad" ? "text-white" : "text-black"
-              }`}
-            >
-              Sad
-            </b>
+            <b className="relative text-xl font-semibold text-white">Sad</b>
           </button>
         </Link>
         <Link href="/love">
           <button
             className={`cursor-pointer py-[9px] px-4 ${
-              pathname === "/love" ? "bg-firebrick" : "bg-transparent"
-            } rounded-29xl hover:bg-tomato`}
+              pathname === "/love" ? "bg-custom-gradient" : "bg-transparent"
+            } rounded-xl hover:bg-custom-gradient`}
           >
-            <b
-              className={`relative text-xl font-inter ${
-                pathname === "/love" ? "text-white" : "text-black"
-              }`}
-            >
-              Love
-            </b>
+            <b className="relative text-xl font-semibold text-white">Love</b>
           </button>
         </Link>
       </nav>

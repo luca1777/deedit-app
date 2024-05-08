@@ -23,9 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* <PostsProvider> */}
         <Topbar />
-        <main className="flex flex-row">
+        <main className="flex">
           <LeftSidebar />
-          <section className="flex flex-1 flex-col items-center bg-dark-1 pt-28 sm:px-10">
+          <section className="flex flex-1 flex-col items-center bg-dark-1 pt-28 sm:px-10 padding-layout">
             <div className="w-full max-w-4xl pb-4">{children}</div>
           </section>
         </main>
