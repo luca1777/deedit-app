@@ -22,7 +22,7 @@ const PostCard = ({ post }: PostProps) => {
   const { content, _id, parentId, createdAt, children, likes } = post;
 
   return (
-    <article className="w-full mx-auto max-w-[1000px] flex flex-col rounded-xl bg-dark-4 p-7">
+    <article className="w-full mx-auto max-w-[800px] flex flex-col rounded-xl bg-dark-4 p-7">
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
