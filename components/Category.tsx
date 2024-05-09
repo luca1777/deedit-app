@@ -7,8 +7,8 @@ const Category: NextPage = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-full flex justify-center items-center bg-black mb-10">
-      <nav className="w-[450px] rounded-xl bg-dark-4 shadow-[0px_12px_20px_rgba(0,_0,_0,_0.04)] flex justify-between py-[5px] px-1 max-w-[95%] lg:max-w-full text-xl text-black font-inter">
+    <div className="w-full flex justify-center items-center bg-black mb-10 px-4">
+      <nav className="max-w-[450px] rounded-xl bg-dark-4 flex justify-between py-[5px] px-1 w-full text-xl text-black font-inter">
         <Link href="/">
           <button
             className={`cursor-pointer py-[9px] px-4 ${

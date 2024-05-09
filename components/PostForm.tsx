@@ -66,8 +66,8 @@ const PostForm = () => {
       <div className="w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full flex flex-col">
-            <div className="w-full flex gap-4">
-              <div className="">
+            <div className="w-full flex md:gap-4">
+              <div className="hidden md:block">
                 <Image
                   src={UserFakeImg}
                   alt="user"
@@ -94,7 +94,7 @@ const PostForm = () => {
                   <select
                     id="category"
                     name="category"
-                    className="mt-1 rounded-lg border text-gray-400 border-gray-500 p-2 w-[300px]"
+                    className="mt-1 rounded-lg border-2 text-gray-400 border-gray-500 p-2 w-full"
                     {...register("category")}
                   >
                     <option value="">Please choose a category...</option>
