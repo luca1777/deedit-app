@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Topbar from "../components/shared/Topbar";
 import LeftSidebar from "../components/shared/LeftSidebar";
 import Bottombar from "../components/shared/Bottombar";
-// import { PostsProvider } from "../context/posts";
+import Category from "@/components/Category";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,18 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {/* <PostsProvider> */}
-        <Topbar />
-        <main className="flex">
-          <LeftSidebar />
-          <section className="flex flex-1 flex-col items-center bg-dark-1 padding-top-layout padding-md-top-layout sm:px-10 padding-layout">
-            <div className="w-full max-w-4xl pb-4">{children}</div>
-          </section>
-        </main>
-        <Bottombar />
-        {/* </PostsProvider> */}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
