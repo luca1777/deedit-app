@@ -18,7 +18,7 @@ const PostButtons = ({ postId, likes }) => {
           alt="reply"
           width={24}
           height={24}
-          className="cursor-pointer object-contain animate-pulse"
+          className="cursor-pointer object-contain pulse-comment-btn"
         />
       </Link>
       <Image

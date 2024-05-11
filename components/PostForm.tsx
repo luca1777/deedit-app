@@ -66,8 +66,8 @@ const PostForm = () => {
       <div className="w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full flex flex-col">
-            <div className="w-full flex md:gap-4">
-              <div className="hidden md:block">
+            <div className="w-full flex gap-3">
+              <div className="">
                 <Image
                   src={UserFakeImg}
                   alt="user"
@@ -77,7 +77,10 @@ const PostForm = () => {
                 />
               </div>
               <div className="w-full">
-                <div className="w-full my-4">
+                <div className="w-full">
+                  <p className="font-semibold">Mihai Alexandru</p>
+                </div>
+                <div className="w-full mb-4 mt-2">
                   <textarea
                     id="content"
                     placeholder="What's on your mind?"
@@ -85,7 +88,7 @@ const PostForm = () => {
                       setTextDraft((e.target as HTMLInputElement).value)
                     }
                     {...register("content")}
-                    className="w-full border-b font-normal text-xl outline-none h-48 resize-none"
+                    className="w-full border-b font-normal outline-none h-36 resize-none"
                   />
                   <p className="text-red-600">{errors.content?.message}</p>
                 </div>
