@@ -4,6 +4,7 @@ import { sidebarLinks } from "../../constants/index";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 const LeftSidebar = () => {
   const pathname = usePathname();
@@ -36,6 +37,7 @@ const LeftSidebar = () => {
               );
             })}
           </div>
+          <UserButton />
           <div className="mt-10 px-6"></div>
         </div>
       </div>
