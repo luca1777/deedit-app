@@ -2,9 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import UserImg from "../public/assets/user-fake.jpg";
-import ShareImg from "../public/assets/share.svg";
-import ShareModal from "./ShareButton";
-import { text } from "stream/consumers";
 import { fetchCommentById } from "@/lib/actions/comment.action";
 import CommentButtons from "./CommentButtons";
 
@@ -52,7 +49,11 @@ const CommentCard = async ({ comment }: CommentProps) => {
             <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-2 flex flex-col gap-3">
-              <CommentButtons commentId={plainCommentId} likes={likes} />
+              <CommentButtons
+                commentId={plainCommentId}
+                likes={likes}
+                author={JSON.stringify(nestedReply.author)}
+              />
 
               {children && children.length > 0 && (
                 <div className="">
@@ -74,7 +75,6 @@ const CommentCard = async ({ comment }: CommentProps) => {
             </div>
           </div>
         </div>
-        {/* {isShareOpen && <ShareModal closeModal={closeModal} />} */}
       </div>
     </article>
   );

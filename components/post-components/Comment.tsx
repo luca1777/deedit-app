@@ -8,11 +8,12 @@ import { addCommentToPost } from "@/lib/actions/post.action";
 import { addReplyToComment } from "@/lib/actions/comment.action";
 
 interface Props {
+  author: string;
   postId: string;
   isReply: boolean;
 }
 
-const Comment = ({ postId, isReply }: Props) => {
+const Comment = ({ postId, isReply, author }: Props) => {
   const [commentBody, setCommentBody] = useState<string>("");
   const pathname = usePathname();
 
@@ -27,9 +28,19 @@ const Comment = ({ postId, isReply }: Props) => {
     const plainPostId = JSON.parse(JSON.stringify(postId));
 
     if (isReply) {
-      await addReplyToComment(plainPostId, values.comment, pathname);
+      await addReplyToComment(
+        JSON.parse(author),
+        plainPostId,
+        values.comment,
+        pathname
+      );
     } else {
-      await addCommentToPost(plainPostId, values.comment, pathname);
+      await addCommentToPost(
+        JSON.parse(author),
+        plainPostId,
+        values.comment,
+        pathname
+      );
     }
     reset();
   };

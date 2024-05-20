@@ -9,6 +9,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const plainPostId = JSON.parse(JSON.stringify(params.id));
   const post = await fetchPostById(params.id);
 
+  console.log(post);
+
   return (
     <section className="w-full flex flex-col justify-center items-center pb-8">
       <div className="px-4 mb-6">
@@ -16,7 +18,11 @@ const Page = async ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="w-full px-4 mt-7">
-        <Comment postId={plainPostId} isReply={false} />
+        <Comment
+          postId={plainPostId}
+          isReply={false}
+          author={JSON.stringify(post.author)}
+        />
       </div>
 
       <div className="mt-10 px-4 w-full flex flex-col gap-6">

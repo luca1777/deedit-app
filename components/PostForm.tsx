@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
   category: Yup.string().required("Category is required"),
 });
 
-const PostForm = () => {
+const PostForm = ({ authorId }) => {
   const router = useRouter();
   const [textDraft, setTextDraft] = useLocalStorage("textDraft", "");
 
@@ -41,6 +41,7 @@ const PostForm = () => {
   const onSubmit = async (values) => {
     try {
       await createPost({
+        author: JSON.parse(authorId),
         content: values.content,
         category: values.category,
       });

@@ -10,9 +10,10 @@ export async function createPost(params: any) {
   try {
     connectToDatabase();
 
-    const { content, category } = params;
+    const { content, category, author } = params;
 
     const post = await Post.create({
+      author,
       content,
       category,
     });
@@ -138,6 +139,7 @@ export async function fetchPostById(id: string) {
 }
 
 export async function addCommentToPost(
+  author: string,
   postId: string,
   comment: string,
   path: string
@@ -153,6 +155,7 @@ export async function addCommentToPost(
     }
 
     const commentPost = new Comment({
+      author: author,
       content: comment,
       parentId: postId,
     });

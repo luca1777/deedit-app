@@ -26,6 +26,7 @@ export async function fetchCommentById(id: string) {
 }
 
 export async function addReplyToComment(
+  author: string,
   parentId: string,
   comment: string,
   path: string
@@ -41,6 +42,7 @@ export async function addReplyToComment(
     }
 
     const commentNested = new Comment({
+      author: author,
       content: comment,
       parentId: parentId,
     });
