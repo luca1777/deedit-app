@@ -4,9 +4,10 @@ import { sidebarLinks } from "../../constants/index";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { UserButton } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 
 const LeftSidebar = () => {
+  const userId = useAuth();
   const pathname = usePathname();
 
   return (
@@ -18,6 +19,14 @@ const LeftSidebar = () => {
               const isActive =
                 (pathname.includes(link.route) && link.route.length > 1) ||
                 pathname === link.route;
+
+              if (link.route === "/profile") {
+                if (userId) {
+                  link.route = `${link.route}/${userId.userId}`;
+                } else {
+                  return null;
+                }
+              }
 
               return (
                 <div key={link.label} className="w-[60px] h-[60px]">
@@ -37,7 +46,6 @@ const LeftSidebar = () => {
               );
             })}
           </div>
-          <UserButton />
           <div className="mt-10 px-6"></div>
         </div>
       </div>

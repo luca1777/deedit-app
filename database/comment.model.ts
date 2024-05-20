@@ -1,6 +1,7 @@
 import { Schema, models, model, Document } from "mongoose";
 
 export interface IComment extends Document {
+  author: Schema.Types.ObjectId;
   content: string;
   parentId: string;
   likes: number;
@@ -9,6 +10,11 @@ export interface IComment extends Document {
 }
 
 const CommentSchema = new Schema({
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   content: { type: String, required: true },
   parentId: { type: String, required: true },
   likes: { type: Number, default: 0 },

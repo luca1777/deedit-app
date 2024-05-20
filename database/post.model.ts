@@ -5,6 +5,7 @@ export interface IPost extends Document {
   category?: string | null;
   parentId?: string | null;
   likes: number;
+  author: Schema.Types.ObjectId;
   children: Schema.Types.ObjectId[];
   createdAt: Date;
 }
@@ -15,6 +16,7 @@ const PostSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   parentId: { type: String },
   likes: { type: Number, default: 0 },
+  author: { type: Schema.Types.ObjectId, ref: "User" },
   children: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
