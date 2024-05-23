@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
-import Category from "../../../../components/Category";
 import { fetchPosts } from "@/lib/actions/post.action";
 import PostCard from "@/components/PostCard";
-import Loading from "./loading";
 
 const HomePage: NextPage = async () => {
   const postsData = await fetchPosts(1, 30);

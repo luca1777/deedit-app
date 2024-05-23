@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Image from "next/image";
-import UserFakeImg from "../public/assets/user-fake.jpg";
 import CloseIcon from "../public/assets/close-create-post.svg";
 import { useRouter } from "next/navigation";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -17,7 +16,7 @@ const schema = Yup.object().shape({
   category: Yup.string().required("Category is required"),
 });
 
-const PostForm = ({ authorId }) => {
+const PostForm = ({ username, userPicture, authorId }) => {
   const router = useRouter();
   const [textDraft, setTextDraft] = useLocalStorage("textDraft", "");
 
@@ -70,16 +69,16 @@ const PostForm = ({ authorId }) => {
             <div className="w-full flex gap-3">
               <div className="">
                 <Image
-                  src={UserFakeImg}
+                  src={userPicture}
                   alt="user"
-                  width={60}
-                  height={60}
+                  width={40}
+                  height={40}
                   className="rounded-full w-full"
                 />
               </div>
               <div className="w-full">
                 <div className="w-full">
-                  <p className="font-semibold">Mihai Alexandru</p>
+                  <p className="font-semibold">{username}</p>
                 </div>
                 <div className="w-full mb-4 mt-2">
                   <textarea

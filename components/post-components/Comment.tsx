@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import UserImg from "../../public/assets/user-fake.jpg";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { addCommentToPost } from "@/lib/actions/post.action";
@@ -11,11 +10,14 @@ interface Props {
   author: string;
   postId: string;
   isReply: boolean;
+  userPicture: string;
 }
 
-const Comment = ({ postId, isReply, author }: Props) => {
+const Comment = ({ postId, isReply, author, userPicture }: Props) => {
   const [commentBody, setCommentBody] = useState<string>("");
   const pathname = usePathname();
+
+  console.log(userPicture);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -52,25 +54,23 @@ const Comment = ({ postId, isReply, author }: Props) => {
           <div className="w-full flex gap-4">
             <div>
               <Image
-                src={UserImg}
+                src={userPicture}
                 alt="user"
                 width={40}
                 height={40}
                 className="rounded-full w-full"
               />
             </div>
-            <div className="w-full">
-              <div className="mt-2">
-                <input
-                  id="comment"
-                  placeholder="Repply..."
-                  onInput={(e) =>
-                    setCommentBody((e.target as HTMLInputElement).value)
-                  }
-                  {...register("comment")}
-                  className="w-full text-white bg-black border-none focus:ring-0 focus:outline-none"
-                />
-              </div>
+            <div className="w-full flex items-center">
+              <input
+                id="comment"
+                placeholder="Repply..."
+                onInput={(e) =>
+                  setCommentBody((e.target as HTMLInputElement).value)
+                }
+                {...register("comment")}
+                className="w-full text-white bg-black border-none focus:ring-0 focus:outline-none"
+              />
             </div>
           </div>
 

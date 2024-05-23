@@ -37,9 +37,6 @@ const LikeCommentButton = ({ commentId, likes }) => {
           />
         </button>
       )}
-      <div>
-        <p className="text-gray-400 text-sm">{likes}</p>
-      </div>
     </div>
   );
 };

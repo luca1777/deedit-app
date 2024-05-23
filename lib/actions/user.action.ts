@@ -5,7 +5,7 @@ import { connectToDatabase } from "../mongoose";
 import { revalidatePath } from "next/cache";
 import Post from "@/database/post.model";
 
-export async function getUserById(params: any) {
+export async function getUserByClerkId(params: any) {
   try {
     connectToDatabase();
 
@@ -17,6 +17,19 @@ export async function getUserById(params: any) {
   } catch (error) {
     console.error(error);
     throw new Error("Can't get user");
+  }
+}
+
+export async function getUserById(userId: any) {
+  try {
+    connectToDatabase();
+
+    const user = await User.findById(userId);
+
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw new Error("can't get user");
   }
 }
 

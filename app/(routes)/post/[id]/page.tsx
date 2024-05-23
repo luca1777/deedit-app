@@ -3,17 +3,18 @@ import PostCard from "@/components/PostCard";
 import { fetchPostById } from "@/lib/actions/post.action";
 import React from "react";
 import CommentCard from "../../../../components/CommentCard";
+import { getUserById } from "@/lib/actions/user.action";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;
   const plainPostId = JSON.parse(JSON.stringify(params.id));
   const post = await fetchPostById(params.id);
-
-  console.log(post);
+  const user = await getUserById(post.author);
+  const userPicture = user.picture;
 
   return (
     <section className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="px-4 mb-6">
+      <div className="px-4 mb-6 w-full">
         <PostCard post={post} />
       </div>
 
@@ -22,6 +23,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           postId={plainPostId}
           isReply={false}
           author={JSON.stringify(post.author)}
+          userPicture={userPicture}
         />
       </div>
 

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import UserImg from "../public/assets/user-fake.jpg";
-
 import PostButtons from "./PostButtons";
+import { getUserById } from "@/lib/actions/user.action";
+import { getTimestamp } from "@/lib/utils";
 
 interface PostProps {
   post: Post;
@@ -13,13 +13,15 @@ interface Post {
   _id: string;
   content: string;
   parentId: string | null;
-  createdAt: string;
+  author: string;
+  createdAt: Date;
   likes: number;
   children: Comment[];
 }
 
-const PostCard = ({ post }: PostProps) => {
-  const { content, _id, parentId, createdAt, children, likes } = post;
+const PostCard = async ({ post }: PostProps) => {
+  const { content, _id, parentId, createdAt, author, children, likes } = post;
+  const user = await getUserById(author);
 
   return (
     <article className="w-full mx-auto max-w-[800px] flex flex-col rounded-xl bg-dark-4 p-7">
@@ -28,9 +30,10 @@ const PostCard = ({ post }: PostProps) => {
           <div className="flex flex-col items-center">
             <Link href="/" className="no-underline relative h-11 w-11">
               <Image
-                src={UserImg}
+                src={user.picture}
                 alt="user-img"
-                fill
+                width={40}
+                height={40}
                 className="cursor-pointer rounded-full"
               />
             </Link>
@@ -39,22 +42,45 @@ const PostCard = ({ post }: PostProps) => {
 
           <div className="flex w-full flex-col">
             <Link href="/" className="w-fit">
-              <h4 className="cursor-pointer text-base-semibold text-light-1 pb-2">
-                Mihai Alexandru
-              </h4>
+              <div className="flex flex-col gap-[5px]">
+                <div className="flex gap-2 items-center">
+                  <div>
+                    <h4 className="cursor-pointer text-base-semibold text-light-1">
+                      {user.username}
+                    </h4>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">
+                      {getTimestamp(createdAt)}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-small-regular text-light-2">{content}</p>
+                </div>
+              </div>
             </Link>
-            <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-5 flex flex-col gap-3">
               <PostButtons postId={_id} likes={likes} />
-
-              {children && children.length > 0 && (
-                <Link href={`/post/${_id}`}>
-                  <p className="text-subtle-medium text-gray-400">
-                    {children.length} replies
-                  </p>
-                </Link>
-              )}
+              <div className="flex gap-3">
+                {children && children.length > 0 && (
+                  <Link href={`/post/${_id}`}>
+                    <p className="text-sm text-gray-400">
+                      {children.length} replies
+                    </p>
+                  </Link>
+                )}
+                <div>
+                  {likes > 0 ? (
+                    <p className="text-sm text-gray-400">
+                      {likes} {likes === 1 ? "like" : "likes"}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

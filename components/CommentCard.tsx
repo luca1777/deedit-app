@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import UserImg from "../public/assets/user-fake.jpg";
 import { fetchCommentById } from "@/lib/actions/comment.action";
 import CommentButtons from "./CommentButtons";
+import { getUserById } from "@/lib/actions/user.action";
+import { getTimestamp } from "@/lib/utils";
 
 interface CommentProps {
   comment: Comment;
@@ -14,15 +15,17 @@ interface Comment {
   content: string;
   parentId: string;
   likes: number;
-  createdAt: string;
+  author: string;
+  createdAt: Date;
   children: Comment[];
 }
 
 const CommentCard = async ({ comment }: CommentProps) => {
-  const { content, _id, parentId, createdAt, children, likes } = comment;
+  const { content, _id, parentId, createdAt, children, author, likes } =
+    comment;
   const plainCommentId = JSON.parse(JSON.stringify(_id));
-
   const nestedReply = await fetchCommentById(_id);
+  const user = await getUserById(author);
 
   return (
     <article className="w-full mx-auto max-w-[1000px] flex flex-col rounded-xl pl-7">
@@ -31,37 +34,65 @@ const CommentCard = async ({ comment }: CommentProps) => {
           <div className="flex flex-col items-center">
             <Link href="/" className="no-underline relative h-11 w-11">
               <Image
-                src={UserImg}
+                src={user.picture}
                 alt="user-img"
-                fill
+                width={40}
+                height={40}
                 className="cursor-pointer rounded-full"
               />
             </Link>
             <div className="relative mt-2 w-0.5 grow rounded-full bg-neutral-800" />
           </div>
 
-          <div className="flex w-full flex-col pb-4">
+          <div className="flex w-full flex-col">
             <Link href="/" className="w-fit">
-              <h4 className="cursor-pointer text-base-semibold text-light-1 pb-1">
-                Mihai Alexandru
-              </h4>
+              <div className="flex flex-col gap-[5px]">
+                <div className="flex gap-2 items-center">
+                  <div>
+                    <h4 className="cursor-pointer text-base-semibold text-light-1">
+                      {user.username}
+                    </h4>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">
+                      {getTimestamp(createdAt)}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-small-regular text-light-2">{content}</p>
+                </div>
+              </div>
             </Link>
-            <p className="text-small-regular text-light-2">{content}</p>
 
             <div className="mt-2 flex flex-col gap-3">
-              <CommentButtons
-                commentId={plainCommentId}
-                likes={likes}
-                author={JSON.stringify(nestedReply.author)}
-              />
+              <div className="flex flex-col gap-1">
+                <CommentButtons
+                  commentId={plainCommentId}
+                  likes={likes}
+                  author={JSON.stringify(nestedReply.author)}
+                  userPicture={user.picture}
+                />
 
-              {children && children.length > 0 && (
-                <div className="">
-                  <p className="text-subtle-medium text-gray-1">
-                    {children.length} replies
-                  </p>
+                <div className="flex gap-3">
+                  {children && children.length > 0 && (
+                    <Link href={`/post/${_id}`}>
+                      <p className="text-sm text-gray-400">
+                        {children.length} replies
+                      </p>
+                    </Link>
+                  )}
+                  <div>
+                    {likes > 0 ? (
+                      <p className="text-sm text-gray-400">
+                        {likes} {likes === 1 ? "like" : "likes"}
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
-              )}
+              </div>
 
               <div>
                 <div>
