@@ -7,7 +7,7 @@ import Comment from "./post-components/Comment";
 import LikeCommentButton from "./LikeCommentButton";
 import ShareButton from "./ShareButton";
 
-const CommentButtons = ({ commentId, likes, author }) => {
+const CommentButtons = ({ commentId, likes, author, userPicture }) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   const handleReply = () => {
@@ -39,7 +39,12 @@ const CommentButtons = ({ commentId, likes, author }) => {
 
       {isReplyOpen && (
         <div>
-          <Comment postId={commentId} isReply={true} author={author} />
+          <Comment
+            postId={commentId}
+            isReply={true}
+            author={author}
+            userPicture={userPicture}
+          />
         </div>
       )}
     </div>
