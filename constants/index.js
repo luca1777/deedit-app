@@ -11,14 +11,14 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/create.svg",
-    route: "/creeaza",
+    route: "/create-post",
     label: "Create",
   },
-  {
-    imgURL: "/assets/community.svg",
-    route: "/communities",
-    label: "Communities",
-  },
+  // {
+  //   imgURL: "/assets/community.svg",
+  //   route: "/communities",
+  //   label: "Communities",
+  // },
   {
     imgURL: "/assets/user.svg",
     route: "/profile",
