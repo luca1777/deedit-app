@@ -4,6 +4,7 @@ import { fetchPostById } from "@/lib/actions/post.action";
 import React from "react";
 import CommentCard from "../../../../components/CommentCard";
 import { getUserById } from "@/lib/actions/user.action";
+import Loading from "./loading";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;

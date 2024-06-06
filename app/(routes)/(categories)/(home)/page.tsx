@@ -1,6 +1,13 @@
 import type { NextPage } from "next";
 import { fetchPosts } from "@/lib/actions/post.action";
 import PostCard from "@/components/PostCard";
+import type { Metadata } from "next";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const metadata: Metadata = {
+  title: "Home | Deedit-App",
+  description: "A social app where people can share their thoughts",
+};
 
 const HomePage: NextPage = async () => {
   const postsData = await fetchPosts(1, 30);

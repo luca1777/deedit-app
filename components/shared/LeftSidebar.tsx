@@ -4,7 +4,7 @@ import { sidebarLinks } from "../../constants/index";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@clerk/nextjs";
+import { SignOutButton, useAuth } from "@clerk/nextjs";
 
 const LeftSidebar = () => {
   const userId = useAuth();
@@ -13,7 +13,7 @@ const LeftSidebar = () => {
   return (
     <nav className="hidden md:block">
       <div className="sticky min-w-[100px] left-0 top-0 flex justify-end">
-        <div className="flex h-screen flex-col justify-between overflow-auto border-r border-r-dark-4 bg-zinc-800 bg-opacity-90 pb-5 pt-28 custom-scrollbar">
+        <div className="flex h-screen flex-col justify-between overflow-auto border-r border-r-dark-4 bg-zinc-800 bg-opacity-90 pb-5 pt-28 custom-scrollbar w-full">
           <div className="flex w-full flex-1 flex-col gap-8 px-6">
             {sidebarLinks.map((link) => {
               const isActive =
@@ -46,7 +46,17 @@ const LeftSidebar = () => {
               );
             })}
           </div>
-          <div className="mt-10 px-6"></div>
+          <div className="w-full flex justify-center mb-8">
+            <SignOutButton>
+              <Image
+                src="/assets/signout.svg"
+                width={20}
+                height={20}
+                alt="sign-out"
+                className="cursor-pointer"
+              />
+            </SignOutButton>
+          </div>
         </div>
       </div>
     </nav>
