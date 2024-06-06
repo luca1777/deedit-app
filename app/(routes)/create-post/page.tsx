@@ -3,6 +3,7 @@ import PostForm from "../../../components/PostForm";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getUserByClerkId } from "@/lib/actions/user.action";
+import Loading from "./loading";
 
 const Page = async () => {
   const { userId } = auth();

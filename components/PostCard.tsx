@@ -28,24 +28,27 @@ const PostCard = async ({ post }: PostProps) => {
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
-            <Link href="/" className="no-underline relative h-11 w-11">
+            <Link
+              href={`/profile/${user.clerkId}`}
+              className="no-underline relative h-11 w-11"
+            >
               <Image
                 src={user.picture}
                 alt="user-img"
                 width={40}
                 height={40}
-                className="cursor-pointer rounded-full"
+                className="cursor-pointer rounded-full hover:ring-white ring-1"
               />
             </Link>
             <div className="relative mt-2 w-0.5 grow rounded-full bg-neutral-800" />
           </div>
 
           <div className="flex w-full flex-col">
-            <Link href="/" className="w-fit">
+            <Link href={`/post/${_id}`} className="w-fit">
               <div className="flex flex-col gap-[5px]">
                 <div className="flex gap-2 items-center">
                   <div>
-                    <h4 className="cursor-pointer text-base-semibold text-light-1">
+                    <h4 className="text-base-semibold text-light-1">
                       {user.username}
                     </h4>
                   </div>

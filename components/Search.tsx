@@ -37,7 +37,7 @@ const Search = () => {
   }, [search, router, pathname, searchParams]);
 
   return (
-    <div className="w-full mx-auto max-w-[600px] min-h-[200px] bg-dark-4 rounded-xl border-zinc-700 border">
+    <div className="w-full mx-auto max-w-[800px] min-h-[200px] bg-dark-4 rounded-xl border-zinc-700 border">
       <div className="w-full p-6">
         <div className="w-full flex items-center h-10 gap-4 bg-dark-1 text-white rounded-xl border-zinc-700 border p-2">
           <Image src="/assets/search.svg" width={20} height={20} alt="search" />

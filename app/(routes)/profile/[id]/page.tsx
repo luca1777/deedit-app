@@ -2,6 +2,7 @@ import { getUserByClerkId } from "@/lib/actions/user.action";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Loading from "./loading";
 
 export interface URLProps {
   params: {
